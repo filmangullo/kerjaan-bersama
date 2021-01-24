@@ -1,11 +1,5 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 	<title>Soft a Human Resource Management Category Bootstrap Responsive Web Template | Contact :: w3layouts</title>
@@ -59,6 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- js -->
 	<script type="text/javascript" src="{{asset("js/jquery-2.1.4.min.js")}}"></script>
 	<script type="text/javascript" src="{{asset("js/bootstrap.js")}}"></script>
+	@yield('script')
 </body>
 
 </html>

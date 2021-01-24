@@ -17,7 +17,7 @@
 
         <ul class="short_w3ls"_w3ls>
             <li><a href="/">Beranda</a><span>|</span></li>
-            <li>Mata Pelajaran</li>
+            <li><a href="{{route("pertemuan.index", $mataPelajaran->id)}}">{{$mataPelajaran->nama}}</a></li>
         </ul>
     </div>
 </div>

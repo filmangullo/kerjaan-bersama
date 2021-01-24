@@ -20,6 +20,11 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::get('/{id}/create', 'PertemuanController@create')->name('pertemuan.create');
     Route::post('/{id}/store', 'PertemuanController@store')->name('pertemuan.store');
     Route::get('/{id}/show', 'PertemuanController@show')->name('pertemuan.show');
+
+    Route::group(['prefix' => 'deskripsi'], function () {
+        Route::get('/{id}/create', 'DeskripsiController@create')->name('deskripsi.create');
+        Route::post('/{id}/store', 'DeskripsiController@store')->name('deskripsi.store');
+    });
 });
 
 Route::group(['prefix' => 'panduan'], function () {

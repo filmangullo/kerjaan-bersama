@@ -54,6 +54,9 @@ class PertemuanController extends Controller
 
     public function show($id) 
     {
-        return view('pertemuan.show')->render();
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        return view('pertemuan.show', [
+            'pertemuan'     => $pertemuan
+        ])->render();
     }
 }
