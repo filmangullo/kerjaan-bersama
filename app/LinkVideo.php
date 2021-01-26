@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Deskripsi extends Model
+class LinkVideo extends Model
 {
     use SoftDeletes;
-    protected $table = 'deskripsis';
+    protected $table = 'link_videos';
 
     public function pertemuans()
     {

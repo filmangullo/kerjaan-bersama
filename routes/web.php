@@ -24,6 +24,13 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::group(['prefix' => 'deskripsi'], function () {
         Route::get('/{id}/create', 'DeskripsiController@create')->name('deskripsi.create');
         Route::post('/{id}/store', 'DeskripsiController@store')->name('deskripsi.store');
+        Route::get('/{id}/softDestroy', 'DeskripsiController@softDestroy')->name('deskripsi.softDestroy');
+    });
+
+    Route::group(['prefix' => 'link-video'], function () {
+        Route::get('/{id}/create', 'LinkVideoController@create')->name('linkVideo.create');
+        Route::post('/{id}/store', 'LinkVideoController@store')->name('linkVideo.store');
+        Route::get('/{id}/softDestroy', 'LinkVideoController@softDestroy')->name('linkVideo.softDestroy');
     });
 });
 

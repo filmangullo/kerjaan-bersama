@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertemuan;
-use App\Deskripsi;
+use App\LinkVideo;
 
-class DeskripsiController extends Controller
+class LinkVideoController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,11 +17,11 @@ class DeskripsiController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function create($id)
     {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
-        return view('deskripsi.create', [
+        return view('link-video.create', [
             'pertemuan'     => $pertemuan
         ])->render();
     }
@@ -29,9 +29,10 @@ class DeskripsiController extends Controller
     public function store(Request $request, $id)
     {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
-        $deskripsi      = new Deskripsi();
+        $deskripsi      = new LinkVideo();
         $deskripsi->pertemuan_id    = $pertemuan->id;
-        $deskripsi->text            = $request->text;
+        $deskripsi->nama            = $request->nama;
+        $deskripsi->link            = $request->link;
         if($deskripsi->save()) 
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
@@ -40,7 +41,7 @@ class DeskripsiController extends Controller
 
     public function softDestroy($id)
     {
-        $query = Deskripsi::where('id', $id)->firstOrFail();
+        $query = LinkVideo::where('id', $id)->firstOrFail();
         $pertemuanId = $query->pertemuan_id;
 
         if($query->delete())

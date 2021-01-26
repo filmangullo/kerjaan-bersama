@@ -23,18 +23,20 @@
         <div class="inner_sec_grids_info_w3ls">
             <div class="col-md-8 job_info_left">
                 <div class="single-left1">
-                    <img src="images/banner3.jpg" alt=" " class="img-responsive" />
-                    <h3>Sed ut perspiciatis unde omnis iste natus error sit facilisis erat posuere erat</h3>
-                    <ul>
-                        <li><span class="fa fa-user" aria-hidden="true"></span><a href="#">Michael Smith</a></li>
-                        <li><span class="fa fa-tag" aria-hidden="true"></span><a href="#">5 Tags</a></li>
-                        <li><span class="fa fa-envelope-o" aria-hidden="true"></span><a href="#">5 Comments</a></li>
-                    </ul>
+                    {{-- Deskripsi --}}
                     @foreach ($pertemuan->deskripsis as $deskripsi)
-                    <p>{!! $deskripsi->text !!}</p>
+                        <p>{!! $deskripsi->text !!}
+                        <a href="{{route("deskripsi.softDestroy", $deskripsi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Deskripsi</a>
+                        </p>
                     @endforeach
-                </div>
-                <div class="comments">
+                    {{-- Video --}}
+                    @foreach ($pertemuan->linkVideos as $linkVideo)
+                        <h3>{{$linkVideo->nama}}</h3>
+                        <iframe width="100%" height="345" src="{{ $linkVideo->link }}" alt="" class="img-responsive"></iframe>
+                        <a href="{{route("linkVideo.softDestroy", $linkVideo->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Video</a>
+                    @endforeach
+                    
+                    
                     <h3 class="single">Our Recent Comments</h3>
                     <div class="comments-grids">
                         <div class="comments-grid">
@@ -92,6 +94,7 @@
             <div class="col-md-4 job_info_right">
                 <div class="widget_search">
                     <a href="{{route("deskripsi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Deskripsi</a>
+                    <a href="{{route("linkVideo.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Video</a>
                 </div>
                 <div class="widget_search">
                     <h5 class="widget-title">Absensi</h5>
