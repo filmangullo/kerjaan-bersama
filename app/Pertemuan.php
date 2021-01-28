@@ -8,6 +8,11 @@ class Pertemuan extends Model
 {
     protected $table = 'pertemuans';
 
+    public function users()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
     public function mataPelajarans()
     {
         return $this->belongsTo('App\MataPelajaran', 'mata_pelajarans_id', 'id');
@@ -23,4 +28,8 @@ class Pertemuan extends Model
         return $this->hasMany('App\LinkVideo', 'pertemuan_id', 'id');
     }
 
+    public function komentars()
+    {
+        return $this->hasMany('App\Komentar', 'pertemuan_id', 'id');
+    }
 }

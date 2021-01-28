@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\MataPelajaran;
 use App\Pertemuan;
+use App\Komentar;
 
 class PertemuanController extends Controller
 {
@@ -58,5 +61,26 @@ class PertemuanController extends Controller
         return view('pertemuan.show', [
             'pertemuan'     => $pertemuan
         ])->render();
+    }
+
+    public function komentarCreate($id) {
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        return view('komentar.index', [
+            'pertemuan'     => $pertemuan
+        ])->render();
+    }
+
+    public function komentarStore(Request $request, $id) {
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        $path = Storage::putFile('public', $request->file('file'));
+        $komentar      = new Komentar();
+        $komentar->pertemuan_id    = $pertemuan->id;
+        $komentar->file            = $path;
+        $komentar->komentar        = $request->komentar;
+        $komentar->user_id         = Auth::user()->id;
+        if($komentar->save()) 
+        {
+            return redirect()->route('pertemuan.show', $pertemuan->id);
+        }
     }
 }

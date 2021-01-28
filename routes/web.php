@@ -32,6 +32,12 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::post('/{id}/store', 'LinkVideoController@store')->name('linkVideo.store');
         Route::get('/{id}/softDestroy', 'LinkVideoController@softDestroy')->name('linkVideo.softDestroy');
     });
+
+    Route::group(['prefix' => 'komentar'], function () {
+        Route::get('/{id}/create', 'PertemuanController@komentarCreate')->name('komentar.create');
+        Route::post('/{id}/store', 'PertemuanController@komentarStore')->name('komentar.store');
+        
+    });
 });
 
 Route::group(['prefix' => 'panduan'], function () {

@@ -39,50 +39,28 @@
                     
                     <h3 class="single">Our Recent Comments</h3>
                     <div class="comments-grids">
+                        @foreach ($pertemuan->komentars as $komentar)
                         <div class="comments-grid">
                             <div class="comments-grid-left">
                                 <img src="images/pf1.jpg" alt=" " class="img-responsive">
                             </div>
                             <div class="comments-grid-right">
-                                <h4><a href="#">Michael Crisp</a></h4>
+                                <h4><a href="#">{!!$komentar->users['name']!!}</a></h4>
                                 <ul>
-                                    <li>5 Nov 2017 <i>|</i></li>
+                                    <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
                                     <li><a href="#">Reply</a></li>
                                 </ul>
-                                <p>Ut ex metus, ornare ac ultricies sit amet, auctor a elit. Praesent sit amet
-                                    scelerisque massa. Duis porta risus
-                                    id urna finibus aliquet.</p>
+                                <p>{!!$komentar->komentar!!}</p>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
-                        <div class="comments-grid">
-                            <div class="comments-grid-left">
-                                <img src="images/pf2.jpg" alt=" " class="img-responsive">
-                            </div>
-                            <div class="comments-grid-right">
-                                <h4><a href="#">Adam Lii</a></h4>
-                                <ul>
-                                    <li>8 Nov 2017 <i>|</i></li>
-                                    <li><a href="#">Reply</a></li>
-                                </ul>
-                                <p>Ut ex metus, ornare ac ultricies sit amet, auctor a elit. Praesent sit amet
-                                    scelerisque massa. Duis porta risus
-                                    id urna finibus aliquet.</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="w3layouts_mail_grid single">
+                        @endforeach
+                        <div class="w3layouts_mail_grid">
                             <h3 class="single">Leave a Comment</h3>
                             <form action="#" method="post">
-                                <div class="col-md-6 wthree_contact_left_grid">
-                                    <input type="text" name="Name" placeholder="Name" required="">
-                                    <input type="email" name="Email" placeholder="Email" required="">
-                                    <input type="text" name="Telephone" placeholder="Telephone" required="">
-                                    <input type="text" name="Subject" placeholder="Subject" required="">
-                                </div>
-                                <div class="col-md-6 wthree_contact_left_grid">
-                                    <textarea name="Message" placeholder="Message..." required=""></textarea>
-                                    <input type="submit" value="Submit">
+                                
+                                <div class="col-md-12 wthree_contact_left_grid">
+                                    <a href="javascript:void(0);" data-href="{{ route('komentar.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Komentar</a>
                                 </div>
                                 <div class="clearfix"> </div>
 
@@ -128,4 +106,27 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document" >
+
+    </div>
+</div>
+
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('.openPopup').on('click', function () {
+            var dataURL = $(this).attr('data-href');
+            $('.modal-dialog').load(dataURL, function () {
+                $('#myModal').modal({
+                    show: true
+                });
+            });
+        });
+    });
+
+</script>
 @endsection
