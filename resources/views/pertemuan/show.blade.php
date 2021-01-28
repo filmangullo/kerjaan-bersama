@@ -1,5 +1,6 @@
 @extends('layouts.content')
 
+
 @section('short')
 <div class="services-breadcrumb_w3layouts">
     <div class="inner_breadcrumb">
@@ -35,32 +36,57 @@
                         <iframe width="100%" height="345" src="{{ $linkVideo->link }}" alt="" class="img-responsive"></iframe>
                         <a href="{{route("linkVideo.softDestroy", $linkVideo->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Video</a>
                     @endforeach
+                    {{-- Dokumen --}}
+                    @foreach ($pertemuan->dokumens as $dokumen)
+                        <p>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></p>
+                        
+                    @endforeach
                     
-                    
-                    <h3 class="single">Our Recent Comments</h3>
+                    <h3 class="single">Pertanyaan dan Diskusi</h3>
                     <div class="comments-grids">
                         @foreach ($pertemuan->komentars as $komentar)
+                        {{-- Komentar --}}
                         <div class="comments-grid">
                             <div class="comments-grid-left">
-                                <img src="images/pf1.jpg" alt=" " class="img-responsive">
+                                <img src="{{asset("pengajar.png")}}" alt=" " class="img-responsive">
                             </div>
                             <div class="comments-grid-right">
                                 <h4><a href="#">{!!$komentar->users['name']!!}</a></h4>
                                 <ul>
                                     <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
-                                    <li><a href="#">Reply</a></li>
+                                    <li><a href="javascript:void(0);" data-href="{{ route('balasan.create', $komentar->id) }}" style="color:blue" class="openPopup">Komentar</a></li>
+                                    <li><a href="#" style="color:red">Hapus</a></li>
                                 </ul>
+                                <img src="{{asset('storage/'.$komentar->file)}}" alt="{{$komentar->file}}" class="img-responsive">
                                 <p>{!!$komentar->komentar!!}</p>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
+                            {{-- Balasan --}}
+                            @foreach ($komentar->balasans as $balasan)
+                                <div class="comments-grid" style="margin-left:10%">
+                                    <div class="comments-grid-left">
+                                        <img src="{{asset("pengajar.png")}}" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="comments-grid-right">
+                                        <h4><a href="#">{!!$balasan->users['name']!!}</a></h4>
+                                        <ul>
+                                            <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
+                                            <li><a href="{{route("balasan.destroy", $balasan->id) }}" style="color:red">Hapus</a></li>
+                                        </ul>
+                                        
+                                        <p>{!!$komentar->komentar!!}</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            @endforeach
+                        <hr>
                         @endforeach
                         <div class="w3layouts_mail_grid">
-                            <h3 class="single">Leave a Comment</h3>
                             <form action="#" method="post">
                                 
                                 <div class="col-md-12 wthree_contact_left_grid">
-                                    <a href="javascript:void(0);" data-href="{{ route('komentar.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Komentar</a>
+                                    <a href="javascript:void(0);" data-href="{{ route('komentar.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Diskusi</a>
                                 </div>
                                 <div class="clearfix"> </div>
 
@@ -73,6 +99,7 @@
                 <div class="widget_search">
                     <a href="{{route("deskripsi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Deskripsi</a>
                     <a href="{{route("linkVideo.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Video</a>
+                    <a href="javascript:void(0);" data-href="{{ route('dokumen.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Dokumen</a>
                 </div>
                 <div class="widget_search">
                     <h5 class="widget-title">Absensi</h5>

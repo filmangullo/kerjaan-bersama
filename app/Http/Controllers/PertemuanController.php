@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\MataPelajaran;
 use App\Pertemuan;
 use App\Komentar;
+use App\Balasan;
+use App\Dokumen;
 
 class PertemuanController extends Controller
 {
@@ -63,9 +65,30 @@ class PertemuanController extends Controller
         ])->render();
     }
 
+    public function dokumenCreate($id)
+    {
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        return view('dokumen.create', [
+            'pertemuan'     => $pertemuan
+        ])->render();
+    }
+
+    public function dokumenStore(Request $request, $id) {
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        $path = Storage::putFile('public', $request->file('file'));
+        $dokumen      = new Dokumen();
+        $dokumen->pertemuan_id    = $pertemuan->id;
+        $dokumen->nama            = $request->nama;
+        $dokumen->file            = substr($path,7);
+        if($dokumen->save()) 
+        {
+            return redirect()->route('pertemuan.show', $pertemuan->id);
+        }
+    }
+
     public function komentarCreate($id) {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
-        return view('komentar.index', [
+        return view('komentar.create', [
             'pertemuan'     => $pertemuan
         ])->render();
     }
@@ -75,12 +98,45 @@ class PertemuanController extends Controller
         $path = Storage::putFile('public', $request->file('file'));
         $komentar      = new Komentar();
         $komentar->pertemuan_id    = $pertemuan->id;
-        $komentar->file            = $path;
+        $komentar->file            = substr($path,7);
         $komentar->komentar        = $request->komentar;
         $komentar->user_id         = Auth::user()->id;
         if($komentar->save()) 
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
+        }
+    }
+
+    public function balasanCreate($id) {
+        $komentar      = Komentar::where('id', $id)->firstOrFail();
+        return view('balasan.create', [
+            'komentar'     => $komentar
+        ])->render();
+    }
+
+    public function balasanStore(Request $request, $id) {
+        $komentar      = Komentar::where('id', $id)->firstOrFail();
+        // $path = Storage::putFile('public', $request->file('file'));
+        $balasan      = new Balasan();
+        $balasan->komentar_id     = $komentar->id;
+        $balasan->user_id         = Auth::user()->id;
+        $balasan->balasan         = $request->balasan;
+        // $komentar->file            = substr($path,7);
+    
+        if($balasan->save()) 
+        {
+            return redirect()->route('pertemuan.show', $komentar->pertemuan_id);
+        }
+    }
+
+    public function balasanDestroy($id)
+    {
+        $query = Balasan::where('id', $id)->firstOrFail();
+        $pertemuanId = Komentar::where('id', $id)->firstOrFail()->pertemuan_id;
+
+        if($query->delete())
+        {
+            return redirect()->route('pertemuan.show', $pertemuanId);
         }
     }
 }

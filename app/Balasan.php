@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Komentar extends Model
+class Balasan extends Model
 {
     use SoftDeletes;
-    protected $table = 'komentars';
+    protected $table = 'balasans';
 
     public function users()
     {
@@ -17,11 +17,6 @@ class Komentar extends Model
     
     public function pertemuans()
     {
-        return $this->belongsTo('App\Pertemuan', 'pertemuan_id', 'id');
-    }
-
-    public function balasans()
-    {
-        return $this->hasMany('App\Balasan', 'komentar_id', 'id');
+        return $this->belongsTo('App\Komentar', 'komentar_id', 'id');
     }
 }

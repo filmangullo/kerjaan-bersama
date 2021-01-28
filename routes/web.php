@@ -33,10 +33,22 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/{id}/softDestroy', 'LinkVideoController@softDestroy')->name('linkVideo.softDestroy');
     });
 
+    Route::group(['prefix' => 'dokumen'], function () {
+        Route::get('/{id}/create', 'PertemuanController@dokumenCreate')->name('dokumen.create');
+        Route::post('/{id}/store', 'PertemuanController@dokumenStore')->name('dokumen.store');
+        
+    });
+
     Route::group(['prefix' => 'komentar'], function () {
         Route::get('/{id}/create', 'PertemuanController@komentarCreate')->name('komentar.create');
         Route::post('/{id}/store', 'PertemuanController@komentarStore')->name('komentar.store');
         
+    });
+
+    Route::group(['prefix' => 'balasan'], function () {
+        Route::get('/{id}/create', 'PertemuanController@balasanCreate')->name('balasan.create');
+        Route::post('/{id}/store', 'PertemuanController@balasanStore')->name('balasan.store');
+        Route::get('/{id}/destroy', 'PertemuanController@balasanDestroy')->name('balasan.destroy');
     });
 });
 
