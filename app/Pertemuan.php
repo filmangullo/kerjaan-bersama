@@ -13,6 +13,11 @@ class Pertemuan extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    public function daftarHadirs()
+    {
+        return $this->hasMany('App\DaftarHadir', 'pertemuan_id', 'id');
+    }
+
     public function mataPelajarans()
     {
         return $this->belongsTo('App\MataPelajaran', 'mata_pelajarans_id', 'id');
@@ -26,6 +31,11 @@ class Pertemuan extends Model
     public function linkVideos()
     {
         return $this->hasMany('App\LinkVideo', 'pertemuan_id', 'id');
+    }
+
+    public function linkKuis()
+    {
+        return $this->hasMany('App\LinkKuis', 'pertemuan_id', 'id');
     }
 
     public function dokumens()

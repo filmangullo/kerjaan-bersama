@@ -7,6 +7,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\MataPelajaran;
+use App\DaftarHadir;
 use App\Pertemuan;
 use App\Komentar;
 use App\Balasan;
@@ -65,6 +66,23 @@ class PertemuanController extends Controller
         ])->render();
     }
 
+    public function daftarHadir(Request $request, $id) {
+        $check = DaftarHadir::where('pertemuan_id', $id)
+                            ->where('user_id', Auth::user()->id)
+                            ->doesntExist();
+        
+        if ($check) {
+            $query      = new DaftarHadir();
+
+            $query->pertemuan_id        = $id;
+            $query->user_id             = Auth::user()->id;
+            $query->keterangan          = $request->keterangan;
+            $query->save();
+        }
+
+        return redirect()->route('pertemuan.show', $id);
+    }
+
     public function dokumenCreate($id)
     {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
@@ -104,6 +122,16 @@ class PertemuanController extends Controller
         if($komentar->save()) 
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
+        }
+    }
+
+    public function komentarDestroy($id)
+    {
+        $query = Komentar::where('id', $id)->firstOrFail();
+        $pertemuanId = $query->pertemuan_id;
+        if($query->delete())
+        {
+            return redirect()->route('pertemuan.show', $pertemuanId);
         }
     }
 

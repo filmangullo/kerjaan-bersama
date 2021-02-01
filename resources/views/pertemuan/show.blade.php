@@ -41,7 +41,13 @@
                         <p>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></p>
                         
                     @endforeach
-                    
+
+                    {{-- Kuis --}}
+                    @foreach ($pertemuan->linkKuis as $linkKuis)
+                        <h3 style="margin-bottom:-4px;">{{$linkKuis->nama}} <small><a href="{{$linkKuis->link}}" target="blank"> Mulai Kuis..</a></small></h3>
+                        <a href="{{route("linkKuis.destroy", $linkKuis->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Link Kuis</a>
+                    @endforeach
+
                     <h3 class="single">Pertanyaan dan Diskusi</h3>
                     <div class="comments-grids">
                         @foreach ($pertemuan->komentars as $komentar)
@@ -55,7 +61,7 @@
                                 <ul>
                                     <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
                                     <li><a href="javascript:void(0);" data-href="{{ route('balasan.create', $komentar->id) }}" style="color:blue" class="openPopup">Komentar</a></li>
-                                    <li><a href="#" style="color:red">Hapus</a></li>
+                                    <li><a href="{{route("komentar.destroy", $komentar->id) }}" style="color:red">Hapus</a></li>
                                 </ul>
                                 <img src="{{asset('storage/'.$komentar->file)}}" alt="{{$komentar->file}}" class="img-responsive">
                                 <p>{!!$komentar->komentar!!}</p>
@@ -75,7 +81,7 @@
                                             <li><a href="{{route("balasan.destroy", $balasan->id) }}" style="color:red">Hapus</a></li>
                                         </ul>
                                         
-                                        <p>{!!$komentar->komentar!!}</p>
+                                        <p>{!!$balasan->balasan !!}</p>
                                     </div>
                                     <div class="clearfix"> </div>
                                 </div>
@@ -100,32 +106,31 @@
                     <a href="{{route("deskripsi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Deskripsi</a>
                     <a href="{{route("linkVideo.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Video</a>
                     <a href="javascript:void(0);" data-href="{{ route('dokumen.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Dokumen</a>
+                    <a href="{{route("linkKuis.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Kuis</a>
                 </div>
                 <div class="widget_search">
                     <h5 class="widget-title">Absensi</h5>
                     <div class="widget-content">
                         <span>I'm looking for a ...</span>
-                        <select class="form-control jb_1">
-                            <option value="">Silahkan Melakukan Absensi</option>
-                            <option value="Hadir">Hadir</option>
-                            <option value="Izin">Izin</option>
-                            <option value="Sakit">Sakit</option>
-                        </select>
-                        <input type="submit" value="Submt">
+                        <form action="{{ route("pertemuan.daftarHadir", $pertemuan->id) }}" method="POST">
+                            @csrf
+                            <select class="form-control jb_1" name="keterangan">
+                                <option value="">Silahkan Melakukan Absensi</option>
+                                <option value="Hadir">Hadir</option>
+                                <option value="Izin">Izin</option>
+                                <option value="Sakit">Sakit</option>
+                            </select>
+                            <input type="submit" value="Submt">
+                        </form>
                     </div>
                 </div>
                 <div class="col_3 permit">
                     <h3>Daftar Hadir</h3>
                     <ul class="list_2">
-                        <li><a href="#">Railway Recruitment</a></li>
-                        <li><a href="#">Air Force Jobs</a></li>
-                        <li><a href="#">Police Jobs</a></li>
-                        <li><a href="#">Intelligence Bureau Jobs</a></li>
-                        <li><a href="#">Army Jobs</a></li>
-                        <li><a href="#">Navy Jobs</a></li>
-                        <li><a href="#">BSNL Jobs</a></li>
-                        <li><a href="#">Software Jobs</a></li>
-                        <li><a href="#">Research Jobs</a></li>
+                        @foreach ($pertemuan->daftarHadirs as $item)
+                            <li><a href="#">{{$item->users['name']}}</a> <p style="float: right">{{$item->keterangan}}</p></li>
+                        @endforeach
+                       
                     </ul>
                 </div>
             </div>

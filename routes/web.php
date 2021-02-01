@@ -21,6 +21,8 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::post('/{id}/store', 'PertemuanController@store')->name('pertemuan.store');
     Route::get('/{id}/show', 'PertemuanController@show')->name('pertemuan.show');
 
+    Route::post('/{id}/daftar-hadir', 'PertemuanController@daftarHadir')->name('pertemuan.daftarHadir');
+
     Route::group(['prefix' => 'deskripsi'], function () {
         Route::get('/{id}/create', 'DeskripsiController@create')->name('deskripsi.create');
         Route::post('/{id}/store', 'DeskripsiController@store')->name('deskripsi.store');
@@ -39,10 +41,18 @@ Route::group(['prefix' => 'pertemuan'], function () {
         
     });
 
+    Route::group(['prefix' => 'link-kuis'], function () {
+        Route::get('/{id}/create', 'LinkKuisController@create')->name('linkKuis.create');
+        Route::post('/{id}/store', 'LinkKuisController@store')->name('linkKuis.store');
+        Route::get('/{id}/destroy', 'LinkKuisController@destroy')->name('linkKuis.destroy');
+        
+    });
+
+
     Route::group(['prefix' => 'komentar'], function () {
         Route::get('/{id}/create', 'PertemuanController@komentarCreate')->name('komentar.create');
         Route::post('/{id}/store', 'PertemuanController@komentarStore')->name('komentar.store');
-        
+        Route::get('/{id}/destroy', 'PertemuanController@komentarDestroy')->name('komentar.destroy');
     });
 
     Route::group(['prefix' => 'balasan'], function () {
@@ -68,6 +78,10 @@ Route::group(['prefix' => 'kontak'], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'KontakController@index')->name('kontak.index');
+    
+    
+});
 
 
