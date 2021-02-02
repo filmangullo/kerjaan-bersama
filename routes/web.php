@@ -79,9 +79,18 @@ Route::group(['prefix' => 'kontak'], function () {
 Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', 'KontakController@index')->name('kontak.index');
-    
-    
+    Route::get('/', 'AdminUserController@index')->name('adminUser.index');
+    Route::group(['prefix' => 'user-manage'], function () {
+        // Admin Manage
+        
+        Route::get('/{id}/approve-role', 'AdminUserController@approve')->name('adminUser.approve');
+        Route::get('/{id}/unapprove-role', 'AdminUserController@unapprove')->name('adminUser.unapprove');
+    });
+
+    Route::group(['prefix' => 'kontak'], function () {
+        // Admin Kontak
+        Route::get('/', 'AdminKontakController@index')->name('adminKontak.index');
+    });
 });
 
 
