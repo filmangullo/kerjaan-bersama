@@ -29,6 +29,7 @@ class PertemuanController extends Controller
     {
         $mataPelajaran  = MataPelajaran::where('id', $id)->firstOrFail();
         $pertemuan      = Pertemuan::where('mata_pelajarans_id', $mataPelajaran->id)->orderBy('id')->get();
+        
         return view('pertemuan.index',[
             'mataPelajaran'     => $mataPelajaran,
             'pertemuan'         => $pertemuan
@@ -61,6 +62,7 @@ class PertemuanController extends Controller
     public function show($id) 
     {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+
         return view('pertemuan.show', [
             'pertemuan'     => $pertemuan
         ])->render();

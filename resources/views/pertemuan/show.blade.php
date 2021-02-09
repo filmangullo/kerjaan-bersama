@@ -27,15 +27,31 @@
                     {{-- Deskripsi --}}
                     @foreach ($pertemuan->deskripsis as $deskripsi)
                         <p>{!! $deskripsi->text !!}
-                        <a href="{{route("deskripsi.softDestroy", $deskripsi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Deskripsi</a>
+                            @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                                <a href="{{route("deskripsi.softDestroy", $deskripsi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Deskripsi</a>
+                            @endif
                         </p>
                     @endforeach
                     {{-- Video --}}
                     @foreach ($pertemuan->linkVideos as $linkVideo)
                         <h3>{{$linkVideo->nama}}</h3>
                         <iframe width="100%" height="345" src="{{ $linkVideo->link }}" alt="" class="img-responsive"></iframe>
-                        <a href="{{route("linkVideo.softDestroy", $linkVideo->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Video</a>
+                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                            <a href="{{route("linkVideo.softDestroy", $linkVideo->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Video</a>
+                        @endif
                     @endforeach
+
+                    {{-- Link Presentasi --}}
+                    @foreach ($pertemuan->linkPresentasis as $linkPresentasi)
+                    <div>
+                        <script async src="https://e.prezicdn.net/v1/design.js"></script>
+                        <iframe src="{{ $linkPresentasi->link }}" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay; fullscreen" height="315" width="560" style="margin-top:10px;"></iframe><br>
+                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                            <a href="{{route("linkPresentasi.destroy", $linkPresentasi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Presentasi</a>
+                        @endif
+                    </div>
+                    @endforeach
+
                     {{-- Dokumen --}}
                     @foreach ($pertemuan->dokumens as $dokumen)
                         <p>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></p>
@@ -45,9 +61,19 @@
                     {{-- Kuis --}}
                     @foreach ($pertemuan->linkKuis as $linkKuis)
                         <h3 style="margin-bottom:-4px;">{{$linkKuis->nama}} <small><a href="{{$linkKuis->link}}" target="blank"> Mulai Kuis..</a></small></h3>
-                        <a href="{{route("linkKuis.destroy", $linkKuis->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Link Kuis</a>
+                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                            <a href="{{route("linkKuis.destroy", $linkKuis->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Link Kuis</a>
+                        @endif
                     @endforeach
-
+                    @foreach ($pertemuan->tugas as $tugas)
+                    <div style="margin-top:10px; display:block;">
+                        <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="btn btn-success float-left" style="width:80%;">Tugas</a>
+                        
+                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                            <a href="{{ route('tugas.destroy', $tugas->id) }}" class="float-right btn btn-danger">Hapus</a>
+                        @endif   
+                    </div>
+                    @endforeach
                     <h3 class="single">Pertanyaan dan Diskusi</h3>
                     <div class="comments-grids">
                         @foreach ($pertemuan->komentars as $komentar)
@@ -61,7 +87,9 @@
                                 <ul>
                                     <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
                                     <li><a href="javascript:void(0);" data-href="{{ route('balasan.create', $komentar->id) }}" style="color:blue" class="openPopup">Komentar</a></li>
-                                    <li><a href="{{route("komentar.destroy", $komentar->id) }}" style="color:red">Hapus</a></li>
+                                    @if (Auth::user()->id == $komentar->user_id)
+                                        <li><a href="{{route("komentar.destroy", $komentar->id) }}" style="color:red">Hapus</a></li>
+                                    @endif
                                 </ul>
                                 <img src="{{asset('storage/'.$komentar->file)}}" alt="{{$komentar->file}}" class="img-responsive">
                                 <p>{!!$komentar->komentar!!}</p>
@@ -78,7 +106,11 @@
                                         <h4><a href="#">{!!$balasan->users['name']!!}</a></h4>
                                         <ul>
                                             <li>{{ date_format($komentar->created_at, "F d, Y" ) }} <i>|</i></li>
-                                            <li><a href="{{route("balasan.destroy", $balasan->id) }}" style="color:red">Hapus</a></li>
+
+                                            @if (Auth::user()->id == $balasan->user_id)
+                                                <li><a href="{{route("balasan.destroy", $balasan->id) }}" style="color:red">Hapus</a></li>
+                                            @endif
+                                            
                                         </ul>
                                         
                                         <p>{!!$balasan->balasan !!}</p>
@@ -102,12 +134,16 @@
                 </div>
             </div>
             <div class="col-md-4 job_info_right">
-                <div class="widget_search">
-                    <a href="{{route("deskripsi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Deskripsi</a>
-                    <a href="{{route("linkVideo.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Video</a>
-                    <a href="javascript:void(0);" data-href="{{ route('dokumen.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Dokumen</a>
-                    <a href="{{route("linkKuis.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Kuis</a>
-                </div>
+                @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                    <div class="widget_search">
+                        <a href="{{route("deskripsi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Deskripsi</a>
+                        <a href="{{route("linkVideo.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Video</a>
+                        <a href="{{route("linkPresentasi.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Presentasi</a>
+                        <a href="javascript:void(0);" data-href="{{ route('dokumen.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Dokumen</a>
+                        <a href="{{route("linkKuis.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Link Kuis</a>
+                        <a href="{{route("tugas.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Tugas</a>
+                    </div>
+                @endif
                 <div class="widget_search">
                     <h5 class="widget-title">Absensi</h5>
                     <div class="widget-content">

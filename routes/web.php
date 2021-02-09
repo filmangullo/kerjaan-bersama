@@ -45,7 +45,24 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/{id}/create', 'LinkKuisController@create')->name('linkKuis.create');
         Route::post('/{id}/store', 'LinkKuisController@store')->name('linkKuis.store');
         Route::get('/{id}/destroy', 'LinkKuisController@destroy')->name('linkKuis.destroy');
-        
+    });
+
+    Route::group(['prefix' => 'link-presentasi'], function () {
+        Route::get('/{id}/create', 'LinkPresentasiController@create')->name('linkPresentasi.create');
+        Route::post('/{id}/store', 'LinkPresentasiController@store')->name('linkPresentasi.store');
+        Route::get('/{id}/destroy', 'LinkPresentasiController@destroy')->name('linkPresentasi.destroy');
+    });
+
+    Route::group(['prefix' => 'tugas-panel'], function () {
+        Route::get('/{id}/create', 'TugasController@create')->name('tugas.create');
+        Route::post('/{id}/store', 'TugasController@store')->name('tugas.store');
+        Route::get('/{id}/destroy', 'TugasController@destroy')->name('tugas.destroy');
+    });
+
+    Route::group(['prefix' => 'tugas-kumpul'], function () {
+        Route::get('/{id}/create', 'TugasController@createKumpul')->name('tugasKumpul.create');
+        Route::post('/{id}/store', 'TugasController@storeKumpul')->name('tugasKumpul.store');
+        Route::get('/{id}/show', 'TugasController@showKumpul')->name('tugasKumpul.show');
     });
 
 

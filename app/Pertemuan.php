@@ -28,6 +28,16 @@ class Pertemuan extends Model
         return $this->hasMany('App\Deskripsi', 'pertemuan_id', 'id');
     }
 
+    public function linkPresentasis()
+    {
+        return $this->hasMany('App\LinkPresentasi', 'pertemuan_id', 'id');
+    }
+
+    public function tugas()
+    {
+        return $this->hasMany('App\Tugas', 'pertemuan_id', 'id');
+    }
+
     public function linkVideos()
     {
         return $this->hasMany('App\LinkVideo', 'pertemuan_id', 'id');

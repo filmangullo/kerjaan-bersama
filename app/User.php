@@ -39,11 +39,16 @@ class User extends Authenticatable
 
     public function pertemuans()
     {
-        return $this->hasMany('App\Pertemuan', 'user', 'id');
+        return $this->hasMany('App\Pertemuan', 'user_id', 'id');
     }
 
     public function komentars()
     {
-        return $this->hasMany('App\Komentar', 'user', 'id');
+        return $this->hasMany('App\Komentar', 'user_id', 'id');
+    }
+
+    public function tugasKumpuls()
+    {
+        return $this->hasMany('App\TugasKumpul', 'user_id', 'id');
     }
 }
