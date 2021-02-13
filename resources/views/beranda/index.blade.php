@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!--/tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Soft Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	<meta name="keywords" content="Soft Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 	<script type="application/x-javascript">
 		addEventListener("load", function () {
@@ -107,18 +107,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!--//banner -->
 
-	<!--/search_form -->
-	<div id="search_form" class="search_top">
-		<h2>Start your job search</h2>
-		<form action="#" method="post">
-			<input type="text" name="Enter Keyword(s)" style="width: 80%" placeholder="Enter Keyword(s)" required="">
-
-			<input type="submit" value="Cari Kelas">
-			<div class="clearfix"></div>
-		</form>
-	</div>
-	<!--//search_form -->
-    
     <!-- /inner_content -->
 	<div class="inner_content_info_agileits">
 		<div class="container">
@@ -126,11 +114,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h1 class="text-right">
                     <a href="{{route("mata-pelajaran.create")}}" class="label label-primary">Tambah Pelajaran</a>
                 </h1>
-                
+
 				<h3 class="tittle">PELAJARAN</h3>
 			</div>
 			<div class="inner_sec_grids_info_w3ls">
-                
+
                 @foreach ($mataPelajaran as $item)
                 <div class="col-md-4 blog-grid one lost">
 					<a href="{{route("pertemuan.index", $item->id)}}"><img src="{{asset("images/e4.jpg")}}" alt=""></a>
