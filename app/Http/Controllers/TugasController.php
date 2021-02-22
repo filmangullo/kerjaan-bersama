@@ -32,17 +32,18 @@ class TugasController extends Controller
 
     public function store(Request $request, $id) {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
-        
+
         $path = Storage::putFile('public', $request->file('file'));
         $tugas      = new Tugas();
+        $tugas->deadline        = $request->deadline;
         $tugas->pertemuan_id    = $pertemuan->id;
         $tugas->keterangan      = $request->keterangan;
         $tugas->file            = substr($path,7);
         if ($request->hasFile('file')) {
             $tugas->nama = $request->file('file')->getClientOriginalName();
         }
-        
-        if($tugas->save()) 
+
+        if($tugas->save())
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
         }
@@ -69,10 +70,10 @@ class TugasController extends Controller
         ])->render();
     }
 
-    public function storeKumpul(Request $request, $id) 
+    public function storeKumpul(Request $request, $id)
     {
         $tugas     = Tugas::where('id', $id)->firstOrFail();
-        
+
         $path = Storage::putFile('public', $request->file('file'));
         $tugasKumpul      = new TugasKumpul();
         $tugasKumpul->user_id         = Auth::user()->id;
@@ -82,8 +83,8 @@ class TugasController extends Controller
         if ($request->hasFile('file')) {
             $tugasKumpul->nama = $request->file('file')->getClientOriginalName();
         }
-        
-        if($tugasKumpul->save()) 
+
+        if($tugasKumpul->save())
         {
             return redirect()->route('pertemuan.show', $tugas->pertemuan_id);
         }
@@ -97,5 +98,17 @@ class TugasController extends Controller
             'tugasKumpul'       => $tugasKumpul,
             'pertemuan'         => Pertemuan::where('id', $tugas->pertemuan_id)->firstOrFail()
         ])->render();
+    }
+
+    public function nilaiKumpul($id)
+    {
+        $tugasKumpul = TugasKumpul::where('id', $id)->firstOrFail();
+        $tugas       = Tugas::where('id', $tugasKumpul->tugas_id)->firstOrFail();
+
+        $tugas->nilai       = $request->nilai;
+
+        $tugas->save()
+
+        // return redirect->r
     }
 }

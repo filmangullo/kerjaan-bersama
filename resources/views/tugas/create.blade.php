@@ -26,6 +26,8 @@
                     @csrf
                     <div class="col-md-2"></div>
                     <div class="col-md-8 offset-md-2">
+                        <label>Deadline</label>
+                        <input type="datetime-local" name="deadline" class="form-control" required>
                         <label>Keterangan / Tugas</label>
                         <textarea id="text" class="form-control" name="keterangan" rows="10" cols="50"></textarea>
                         <div class="input-group mb-3" style="margin-top:10px">
@@ -62,7 +64,7 @@
     function myFile() {
         var xfile = document.getElementById("fileX").files[0].name;
         document.getElementById("nameFileX").innerHTML = xfile;
-    }   
+    }
  </script>
- 
+
 @endsection

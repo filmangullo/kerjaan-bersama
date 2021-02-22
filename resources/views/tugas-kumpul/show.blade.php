@@ -27,12 +27,15 @@
                 @if ($tugasKumpul->file != null)
                 <a href="{!! $tugasKumpul->file !!}" download>Download File</a>
                 @endif
-                
+
             </p>
         </div>
         </div>
-        
+        <form>
+            <label>Nilai</label>
+            <input type="number" name="nilai" class="form-control">
+        </form>
     </div>
-    
+
 </div>
 @endsection

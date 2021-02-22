@@ -54,9 +54,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="carousel-caption">
 						<h3>Improving workplace <span>Productivity.</span></h3>
 						<p>Hire. Train. Retain.</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="single.html">Read More »</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -65,9 +62,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="carousel-caption">
 						<h3>Inspiring leadership <span>innovation.</span></h3>
 						<p>Hire. Train. Retain.</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="single.html">Read More »</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -76,9 +70,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="carousel-caption">
 						<h3>Improving workplace <span>Productivity.</span></h3>
 						<p>Hire. Train. Retain.</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="single.html">Read More »</a>
-						</div>
 					</div>
 				</div>
 			</div>

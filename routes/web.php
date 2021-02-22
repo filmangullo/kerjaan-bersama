@@ -13,7 +13,7 @@
 
 Route::get('/', 'BerandaController@index')->name('beranda.index');
 Route::get('/mata-pelajaran/create', 'BerandaController@create')->name('mata-pelajaran.create');
-Route::post('/mata-pelajaran/store', 'BerandaController@store')->name('mata-pelajaran.store');  
+Route::post('/mata-pelajaran/store', 'BerandaController@store')->name('mata-pelajaran.store');
 
 Route::group(['prefix' => 'pertemuan'], function () {
     Route::get('/{id}', 'PertemuanController@index')->name('pertemuan.index');
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::group(['prefix' => 'dokumen'], function () {
         Route::get('/{id}/create', 'PertemuanController@dokumenCreate')->name('dokumen.create');
         Route::post('/{id}/store', 'PertemuanController@dokumenStore')->name('dokumen.store');
-        
+
     });
 
     Route::group(['prefix' => 'link-kuis'], function () {
@@ -63,6 +63,7 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/{id}/create', 'TugasController@createKumpul')->name('tugasKumpul.create');
         Route::post('/{id}/store', 'TugasController@storeKumpul')->name('tugasKumpul.store');
         Route::get('/{id}/show', 'TugasController@showKumpul')->name('tugasKumpul.show');
+        Route::get('/{id}/nilai', 'TugasController@nilaiKumpul')->name('tugasKumpul.nilai');
     });
 
 
@@ -90,7 +91,7 @@ Route::group(['prefix' => 'tentang-kami'], function () {
 Route::group(['prefix' => 'kontak'], function () {
     Route::get('/', 'KontakController@index')->name('kontak.index');
     Route::post('/store', 'KontakController@store')->name('kontak.store');
-    
+
 });
 
 Auth::routes();
@@ -99,7 +100,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminUserController@index')->name('adminUser.index');
     Route::group(['prefix' => 'user-manage'], function () {
         // Admin Manage
-        
+
         Route::get('/{id}/approve-role', 'AdminUserController@approve')->name('adminUser.approve');
         Route::get('/{id}/unapprove-role', 'AdminUserController@unapprove')->name('adminUser.unapprove');
     });
