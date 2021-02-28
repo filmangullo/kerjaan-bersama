@@ -33,9 +33,11 @@
                         @endif
                         @else
                         <li class="dropdown">
-                            <a href="services.html" class="dropdown-toggle effect-3"
+                            <a class="dropdown-toggle effect-3"
                                 data-toggle="dropdown">{{ Auth::user()->name }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                                <li><a href="{{ route('profil', Auth::user()->id) }}" style="hover:background-color:green; cursor: pointer">Profil</a></li>
+                                <hr>
                                 <li><a href="{{ route('logout') }}" style="hover:background-color:green" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"

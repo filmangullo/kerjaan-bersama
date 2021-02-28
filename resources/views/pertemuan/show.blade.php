@@ -55,7 +55,7 @@
                     {{-- Dokumen --}}
                     @foreach ($pertemuan->dokumens as $dokumen)
                         <p>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></p>
-                        
+
                     @endforeach
 
                     {{-- Kuis --}}
@@ -68,10 +68,10 @@
                     @foreach ($pertemuan->tugas as $tugas)
                     <div style="margin-top:10px; display:block;">
                         <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="btn btn-success float-left" style="width:80%;">Tugas</a>
-                        
+
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                             <a href="{{ route('tugas.destroy', $tugas->id) }}" class="float-right btn btn-danger">Hapus</a>
-                        @endif   
+                        @endif
                     </div>
                     @endforeach
                     <h3 class="single">Pertanyaan dan Diskusi</h3>
@@ -110,9 +110,9 @@
                                             @if (Auth::user()->id == $balasan->user_id)
                                                 <li><a href="{{route("balasan.destroy", $balasan->id) }}" style="color:red">Hapus</a></li>
                                             @endif
-                                            
+
                                         </ul>
-                                        
+
                                         <p>{!!$balasan->balasan !!}</p>
                                     </div>
                                     <div class="clearfix"> </div>
@@ -122,7 +122,7 @@
                         @endforeach
                         <div class="w3layouts_mail_grid">
                             <form action="#" method="post">
-                                
+
                                 <div class="col-md-12 wthree_contact_left_grid">
                                     <a href="javascript:void(0);" data-href="{{ route('komentar.create', $pertemuan->id) }}" class="btn btn-block btn-info openPopup">Tambah Diskusi</a>
                                 </div>
@@ -166,7 +166,11 @@
                         @foreach ($pertemuan->daftarHadirs as $item)
                             <li><a href="#">{{$item->users['name']}}</a> <p style="float: right">{{$item->keterangan}}</p></li>
                         @endforeach
-                       
+                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
+                            <div class="widget_search">
+                                <a href="{{route("pertemuan.exportDaftarHadir", $pertemuan->id) }}" class="btn btn-block btn-info">Export</a>
+                            </div>
+                        @endif
                     </ul>
                 </div>
             </div>

@@ -100,15 +100,18 @@ class TugasController extends Controller
         ])->render();
     }
 
-    public function nilaiKumpul($id)
+    public function nilaiKumpul(Request $request,$id)
     {
         $tugasKumpul = TugasKumpul::where('id', $id)->firstOrFail();
         $tugas       = Tugas::where('id', $tugasKumpul->tugas_id)->firstOrFail();
 
-        $tugas->nilai       = $request->nilai;
+        $tugasKumpul->nilai       = $request->nilai;
 
-        $tugas->save()
+        if ($tugasKumpul->save())
+        {
+            return redirect()->route('tugasKumpul.create', $tugasKumpul->tugas_id);
+        }
 
-        // return redirect->r
+
     }
 }

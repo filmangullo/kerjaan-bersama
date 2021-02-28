@@ -29,7 +29,7 @@ class PertemuanController extends Controller
     {
         $mataPelajaran  = MataPelajaran::where('id', $id)->firstOrFail();
         $pertemuan      = Pertemuan::where('mata_pelajarans_id', $mataPelajaran->id)->orderBy('id')->get();
-        
+
         return view('pertemuan.index',[
             'mataPelajaran'     => $mataPelajaran,
             'pertemuan'         => $pertemuan
@@ -59,7 +59,7 @@ class PertemuanController extends Controller
         }
     }
 
-    public function show($id) 
+    public function show($id)
     {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
 
@@ -69,20 +69,32 @@ class PertemuanController extends Controller
     }
 
     public function daftarHadir(Request $request, $id) {
+
         $check = DaftarHadir::where('pertemuan_id', $id)
                             ->where('user_id', Auth::user()->id)
                             ->doesntExist();
-        
+
         if ($check) {
             $query      = new DaftarHadir();
 
             $query->pertemuan_id        = $id;
             $query->user_id             = Auth::user()->id;
             $query->keterangan          = $request->keterangan;
+            $query->tanggal_dan_jam     = date("Y-m-d H:i:s");
             $query->save();
         }
 
         return redirect()->route('pertemuan.show', $id);
+    }
+
+    public function  exportDaftarHadir($id)
+    {
+        $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
+        $daftarHadir    = DaftarHadir::where('pertemuan_id', $pertemuan->id)->get();
+        return view('pertemuan.export_daftar_hadir', [
+            'pertemuan'     => $pertemuan,
+            'daftarHadir'   => $daftarHadir
+        ]);
     }
 
     public function dokumenCreate($id)
@@ -100,7 +112,7 @@ class PertemuanController extends Controller
         $dokumen->pertemuan_id    = $pertemuan->id;
         $dokumen->nama            = $request->nama;
         $dokumen->file            = substr($path,7);
-        if($dokumen->save()) 
+        if($dokumen->save())
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
         }
@@ -121,7 +133,7 @@ class PertemuanController extends Controller
         $komentar->file            = substr($path,7);
         $komentar->komentar        = $request->komentar;
         $komentar->user_id         = Auth::user()->id;
-        if($komentar->save()) 
+        if($komentar->save())
         {
             return redirect()->route('pertemuan.show', $pertemuan->id);
         }
@@ -152,8 +164,8 @@ class PertemuanController extends Controller
         $balasan->user_id         = Auth::user()->id;
         $balasan->balasan         = $request->balasan;
         // $komentar->file            = substr($path,7);
-    
-        if($balasan->save()) 
+
+        if($balasan->save())
         {
             return redirect()->route('pertemuan.show', $komentar->pertemuan_id);
         }

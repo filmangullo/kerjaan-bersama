@@ -1,10 +1,5 @@
 @extends('layouts.content')
 
-@section('link')
-<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
-@endsection
-
 @section('short')
 <div class="services-breadcrumb_w3layouts">
     <div class="inner_breadcrumb">
@@ -13,53 +8,15 @@
             <li><a href="/">Beranda</a><span>|</span></li>
             <li><a href="{{route("pertemuan.index",$pertemuan->mataPelajarans['id'])}}">{{$pertemuan->mataPelajarans['nama']}}</a><span>|</span></li>
             <li><a href="{{route("pertemuan.show",$pertemuan->id)}}">{{$pertemuan->nama}}</a><span>|</span></li>
-            <li>Upload Tugas</li>
+            <li>Export Daftar Hadir</li>
         </ul>
     </div>
 </div>
 @endsection
 
-
 @section('content')
 <div class="inner_content_info_agileits">
     <div class="container">
-        <div class="tittle_head_w3ls">
-            <h3 class="tittle">Kerjakan dan Upload Tugas</h3>
-        </div>
-        <div class="inner_sec_grids_info_w3ls" >
-        <div class="col-md-12" style="margin-bottom:40px;">
-            <p>{!! $tugas->keterangan !!}</p> <br>
-            <p>
-                <a href="{!! $tugas->file !!}" download>{!! $tugas->nama !!}</a>
-            </p>
-        </div>
-        </div>
-
-        <div class="inner_sec_grids_info_w3ls">
-
-            <div class="w3layouts_mail_grid row">
-
-                <form action="{{route("tugasKumpul.store", $tugas->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8 offset-md-2">
-                        <label>Text</label>
-                        <textarea id="text" class="form-control" name="keterangan" rows="10" cols="50"></textarea>
-                        <div class="input-group mb-3" style="margin-top:10px">
-                            <label>* Optional</label>
-                            <div class="custom-file" style="border-style: solid; border-width: 1px; border-color:#ccc; padding:10px; width:100%">
-                                <input type="file" class="custom-file-input" id="fileX" name="file" onchange="myFile()" required>
-                                <label class="custom-file-label" for="file"><span id="nameFileX">upload file max 5 MB....</span></label>
-                            </div>
-                        </div>
-                        <input type="submit" value="Submit">
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="clearfix"> </div>
-
-                </form>
-            </div>
-        </div>
         <div style="margin-top:30px;">
             <table id="myTable" class="table">
                 <thead class="thead-dark">
@@ -67,22 +24,16 @@
                     <th scope="col">#</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Tanggal</th>
-                    <th scope="col">Nilai</th>
-                    @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
-                        <th scope="col">Aksi</th>
-                    @endif
+                    <th scope="col">Keterangan</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tugas->tugasKumpuls as $key => $item)
+                    @foreach ($daftarHadir as $key => $item)
                     <tr>
                         <th scope="row">{{ ++$key }}</th>
                         <td>{{ $item->users['name'] }}</td>
                         <td>{{ date_format($item->created_at, "F d, Y H:i" ) }}</td>
-                        <td>{{ $item->nilai }}</td>
-                        @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
-                            <td><a href="{{ route('tugasKumpul.show', $item->id) }}" class="btn btn-primary">Tampil</a></td>
-                        @endif
+                        <td>{{ $item->keterangan }}</td>
                     </tr>
                     @endforeach
 

@@ -31,9 +31,12 @@
             </p>
         </div>
         </div>
-        <form>
+        <form action="{{ route('tugasKumpul.nilai', $tugasKumpul->id) }}" method="POST">
+            @csrf
             <label>Nilai</label>
             <input type="number" name="nilai" class="form-control">
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 15px; float:right">Simpan</button>
         </form>
     </div>
 

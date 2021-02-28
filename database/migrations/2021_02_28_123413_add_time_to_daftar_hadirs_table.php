@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNilaiToTugasKumpulsTable extends Migration
+class AddTimeToDaftarHadirsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddNilaiToTugasKumpulsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tugas_kumpuls', function (Blueprint $table) {
-            $table->integer('nilai')->nullable()->after('keterangan');
+        Schema::table('daftar_hadirs', function (Blueprint $table) {
+            $table->dateTime('tanggal_dan_jam', $precision = 0)->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddNilaiToTugasKumpulsTable extends Migration
      */
     public function down()
     {
-        Schema::table('tugas_kumpuls', function (Blueprint $table) {
-            $table->dropColumn('nilai');
+        Schema::table('daftar_hadirs', function (Blueprint $table) {
+            $table->dropColumn('tanggal_dan_jam');
         });
     }
 }

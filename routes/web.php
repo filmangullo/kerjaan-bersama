@@ -20,6 +20,7 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::get('/{id}/create', 'PertemuanController@create')->name('pertemuan.create');
     Route::post('/{id}/store', 'PertemuanController@store')->name('pertemuan.store');
     Route::get('/{id}/show', 'PertemuanController@show')->name('pertemuan.show');
+    Route::get('/{id}/export-daftar-hadir', 'PertemuanController@exportDaftarHadir')->name('pertemuan.exportDaftarHadir');
 
     Route::post('/{id}/daftar-hadir', 'PertemuanController@daftarHadir')->name('pertemuan.daftarHadir');
 
@@ -63,9 +64,8 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/{id}/create', 'TugasController@createKumpul')->name('tugasKumpul.create');
         Route::post('/{id}/store', 'TugasController@storeKumpul')->name('tugasKumpul.store');
         Route::get('/{id}/show', 'TugasController@showKumpul')->name('tugasKumpul.show');
-        Route::get('/{id}/nilai', 'TugasController@nilaiKumpul')->name('tugasKumpul.nilai');
+        Route::post('/{id}/buat-nilai', 'TugasController@nilaiKumpul')->name('tugasKumpul.nilai');
     });
-
 
     Route::group(['prefix' => 'komentar'], function () {
         Route::get('/{id}/create', 'PertemuanController@komentarCreate')->name('komentar.create');
@@ -78,6 +78,8 @@ Route::group(['prefix' => 'pertemuan'], function () {
         Route::post('/{id}/store', 'PertemuanController@balasanStore')->name('balasan.store');
         Route::get('/{id}/destroy', 'PertemuanController@balasanDestroy')->name('balasan.destroy');
     });
+
+    Route::get('/{id}/profil', 'ProfilController@index')->name('profil');
 });
 
 Route::group(['prefix' => 'panduan'], function () {
