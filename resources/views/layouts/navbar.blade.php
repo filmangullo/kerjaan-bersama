@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <h1><span class="fa fa-signal" aria-hidden="true"></span> Soft <label>Hr Agency</label></h1>
+                    <h1><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Web <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Belajar</label></h1>
                 </a>
             </div>
             <!--/.navbar-header-->

@@ -80,6 +80,7 @@ Route::group(['prefix' => 'pertemuan'], function () {
     });
 
     Route::get('/{id}/profil', 'ProfilController@index')->name('profil');
+    Route::post('/{id}/profil/update', 'ProfilController@update')->name('profil.update');
 });
 
 Route::group(['prefix' => 'panduan'], function () {

@@ -4,9 +4,9 @@
             <div class="col-md-9 footer_bottom_grid">
                 <div class="footer_bottom1">
                     <a href="index.html">
-                        <h2><span class="fa fa-signal" aria-hidden="true"></span> Soft <label>Hr Agency</label></h2>
+                        <h2><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Web <label>Belajar</label></h2>
                     </a>
-                    <p>© 2017 Soft. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+                    <p>© 2021 Soft. All rights reserved | Design by <a href="#">Dewi</a></p>
                 </div>
             </div>
             <div class="col-md-3 footer_bottom_grid">
