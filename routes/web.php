@@ -99,7 +99,7 @@ Route::group(['prefix' => 'kontak'], function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin'], function () {
+Route::middleware(['auth', 'role'])->prefix('admin')->group(function () {
     Route::get('/', 'AdminUserController@index')->name('adminUser.index');
     Route::group(['prefix' => 'user-manage'], function () {
         // Admin Manage
