@@ -52,24 +52,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="item active">
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>Improving workplace <span>Productivity.</span></h3>
-						<p>Hire. Train. Retain.</p>
+						<h4 style="font-size:24px;">Kenapa kita seringkali gagal? Karena kita selalu banyak berencana dan terlalu sedikit berpikir.</h4>
+						<p>Dewi Widya Astuti</p>
 					</div>
 				</div>
 			</div>
 			<div class="item item2">
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>Inspiring leadership <span>innovation.</span></h3>
-						<p>Hire. Train. Retain.</p>
+						<h4 style="font-size:24px;">Tak ada batasan dalam hidup, kecuali yang kau buat sendiri.</h4>
+						<p>Les Brown</p>
 					</div>
 				</div>
 			</div>
 			<div class="item item3">
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>Improving workplace <span>Productivity.</span></h3>
-						<p>Hire. Train. Retain.</p>
+						<h4>Ia yang mengerjakan lebih dari apa yang dibayar pada suatu saat akan dibayar lebih dari apa yang ia kerjakan.</h4>
+						<p>Napoleon Hill</p>
 					</div>
 				</div>
 			</div>
@@ -77,11 +77,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="container">
 					<div class="carousel-caption">
 
-						<h3>Inspiring leadership <span>innovation.</span></h3>
-						<p>Hire. Train. Retain.</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg scroll" href="#welcome" role="button">Read More »</a>
-						</div>
+						<h4>Jangan biarkan opini orang lain menenggelamkan suara dari dalam diri Anda.></h4>
+						<p>Steve Jobs</p>
+
 					</div>
 				</div>
 			</div>
@@ -101,13 +99,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- /inner_content -->
 	<div class="inner_content_info_agileits">
 		<div class="container">
+            @guest
+
+            @else
+            @if (Auth::user()->role != 'pelajar')
 			<div class="tittle_head_w3ls">
+
                 <h1 class="text-right">
                     <a href="{{route("mata-pelajaran.create")}}" class="label label-primary">Tambah Pelajaran</a>
                 </h1>
 
 				<h3 class="tittle">PELAJARAN</h3>
 			</div>
+            @endif
+            @endguest
 			<div class="inner_sec_grids_info_w3ls">
 
                 @foreach ($mataPelajaran as $item)
