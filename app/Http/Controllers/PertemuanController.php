@@ -127,10 +127,16 @@ class PertemuanController extends Controller
 
     public function komentarStore(Request $request, $id) {
         $pertemuan      = Pertemuan::where('id', $id)->firstOrFail();
-        $path = Storage::putFile('public', $request->file('file'));
+
+
         $komentar      = new Komentar();
         $komentar->pertemuan_id    = $pertemuan->id;
-        $komentar->file            = substr($path,7);
+        if(!empty($request->file('file')))
+        {
+            $path = Storage::putFile('public', $request->file('file'));
+            $komentar->file            = substr($path,7);
+        }
+
         $komentar->komentar        = $request->komentar;
         $komentar->user_id         = Auth::user()->id;
         if($komentar->save())

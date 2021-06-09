@@ -19,7 +19,7 @@
 <div class="inner_content_info_agileits">
     <div class="container">
         <div class="tittle_head_w3ls">
-            <h3 class="tittle">Some More Info </h3>
+            <h3 class="tittle">Ruang Belajar dan Diskusi.</h3>
         </div>
         <div class="inner_sec_grids_info_w3ls">
             <div class="col-md-8 job_info_left">
@@ -67,7 +67,7 @@
                     @endforeach
                     @foreach ($pertemuan->tugas as $tugas)
                     <div style="margin-top:10px; display:block;">
-                        <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="btn btn-success float-left" style="width:80%;">Tugas</a>
+                        <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="float-left btn btn-success" style="width:80%;">Tugas</a>
 
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                             <a href="{{ route('tugas.destroy', $tugas->id) }}" class="float-right btn btn-danger">Hapus</a>
