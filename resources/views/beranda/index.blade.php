@@ -96,40 +96,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!--//banner -->
 
-    <!-- /inner_content -->
-	<div class="inner_content_info_agileits">
-		<div class="container">
-            @guest
+        <!-- /inner_content -->
+        <div class="inner_content_info_agileits">
+            <div class="container">
+                @auth
+                    @if (Auth::user()->role != 'pelajar' && Auth::user()->role_approve == true)
+                    <div class="tittle_head_w3ls">
 
-            @else
-            @if (Auth::user()->role != 'pelajar')
-			<div class="tittle_head_w3ls">
+                        <h1 class="text-right">
+                            <a href="{{route("mata-pelajaran.create")}}" class="label label-primary">Tambah Pelajaran</a>
+                        </h1>
 
-                <h1 class="text-right">
-                    <a href="{{route("mata-pelajaran.create")}}" class="label label-primary">Tambah Pelajaran</a>
-                </h1>
+                        <h3 class="tittle">PELAJARAN</h3>
+                    </div>
+                    @endif
+                @endauth
 
-				<h3 class="tittle">PELAJARAN</h3>
-			</div>
-            @endif
-            @endguest
-			<div class="inner_sec_grids_info_w3ls">
+                    <div class="inner_sec_grids_info_w3ls">
+                        @foreach ($mataPelajaran as $item)
+                        <div class="col-md-4 blog-grid one lost">
+                            <a
+                                @auth
+                                    @if (Auth::user()->role_approve == true)
+                                        href="{{route("pertemuan.index", $item->id)}}"
+                                @endif
+                                    @endauth ><img src="{{asset("images/e4.jpg")}}" alt=""></a>
+                            <div class="events_info">
+                                <h4><a
+                                        @auth
+                                            @if (Auth::user()->role_approve == true)
+                                                href="{{route("pertemuan.index", $item->id)}}"
+                                            @endif
+                                        @endauth >{{$item->nama}}</a></h4>
+                                <p>{{substr($item->keterangan, 0,70)}} ...</p>
+                            </div>
+                        </div>
+                        @endforeach
+                        <div class="clearfix"></div>
 
-                @foreach ($mataPelajaran as $item)
-                <div class="col-md-4 blog-grid one lost">
-					<a href="{{route("pertemuan.index", $item->id)}}"><img src="{{asset("images/e4.jpg")}}" alt=""></a>
-					<div class="events_info">
-						<h4><a href="{{route("pertemuan.index", $item->id)}}">{{$item->nama}}</a></h4>
-						<p>{{substr($item->keterangan, 0,70)}} ...</p>
-					</div>
-				</div>
-                @endforeach
-				<div class="clearfix"></div>
+                    </div>
 
-			</div>
-
-		</div>
-	</div>
+            </div>
+        </div>
 
 	<!-- footer -->
 	@extends('layouts.footer')
