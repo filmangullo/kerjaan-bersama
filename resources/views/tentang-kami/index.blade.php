@@ -31,10 +31,12 @@
                     </div>
                     <div class="col-md-9">
                         <div class="item active" style="margin-bottom: 15px;">
-                            <div class="testimonials_grid_wthree">
-                                <h5>Dewi Widya Astuti</h5>
+                            <div class="text-justify testimonials_grid_wthree" style="text-align: justify; color:black;">
+                                <h4><strong>Dewi Widya Astuti</strong></h4>
 
-                                <h4><i class="fa fa-quote-left" aria-hidden="true"></i> Dewi Widya Astuti lahir dari pasangan ayah Erlani dan ibu Riwayati pada 27 April 1996 di Besitang. Wanita yang akrab disapa Dewi ini mngenyam pendidikan terakhirnya di Madrasah Aliyah Swasta Proyek Univa Medan (2014), dan sekarang sedang menjadi mahasiswa jurusan pendidikan teknik elektro di UNIMED.    </h4>
+                                <h4>Dewi Widya Astuti lahir dari pasangan ayah Erlani dan ibu Riwayati pada 27 April 1996 di Besitang. Wanita yang akrab disapa Dewi ini mngenyam pendidikan terakhirnya di Madrasah Aliyah Swasta Proyek Univa Medan (2014), dan sekarang sedang menjadi mahasiswa jurusan pendidikan teknik elektro di UNIMED.    </h4>
+                                <h4><strong>Deskripsi Media</strong></h4>
+                                <h4>Media pembelajaran berbasis web merupakan media yang menyediakan fasilitas situs pembelajaran yang dapat di akses peserta didik melalui internet untuk keperluan belajar/mengajar. Web tersebut dapat di akses kapan saja dan dimana saja melalui web browser. Selain itu, web juga menyediakan interaksi antara siswa dan guru melalui forum diskusi yang dapat membantu tenaga pengajar dalam mengakses melakukan tugasnya secara praktis, tanpa harus melakukan melakukan pengajaran secara konvesional (tatap muka).</h4>
                             </div>
 
                         </div>
