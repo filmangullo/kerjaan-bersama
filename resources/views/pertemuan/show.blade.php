@@ -35,6 +35,7 @@
                     {{-- Video --}}
                     @foreach ($pertemuan->linkVideos as $linkVideo)
                         <h3>{{$linkVideo->nama}}</h3>
+                        {!! $linkVideo->link !!}
                         <iframe width="100%" height="345" src="{{ $linkVideo->link }}" alt="" class="img-responsive"></iframe>
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                             <a href="{{route("linkVideo.softDestroy", $linkVideo->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Video</a>
