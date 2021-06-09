@@ -21,6 +21,7 @@
                                 <th scope="col">Nama</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Akses</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Handle</th>
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
+                                <td>{{ $user->role_approve == true ? 'Diterima' : 'Menunggu' }}</td>
                                 <td>
                                     <a href="{{route('adminUser.approve', $user->id)}}" class="btn btn-info btn-outline btn-xs">Approve</a>
                                     <a href="{{route('adminUser.unapprove', $user->id)}}" class="btn btn-danger btn-outline btn-xs">Unapprove</a>

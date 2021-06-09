@@ -26,12 +26,17 @@
                 <div class="single-left1">
                     {{-- Deskripsi --}}
                     @foreach ($pertemuan->deskripsis as $deskripsi)
+                    <div style="
+                            height: 400px;
+                            overflow: scroll;">
                         <p>{!! $deskripsi->text !!}
                             @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                                 <a href="{{route("deskripsi.softDestroy", $deskripsi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Deskripsi</a>
                             @endif
                         </p>
+                    </div>
                     @endforeach
+
                     {{-- Video --}}
                     @foreach ($pertemuan->linkVideos as $linkVideo)
                         <h3>{{$linkVideo->nama}}</h3>
