@@ -45,7 +45,8 @@
                     @foreach ($pertemuan->linkPresentasis as $linkPresentasi)
                     <div>
                         <script async src="https://e.prezicdn.net/v1/design.js"></script>
-                        <iframe src="{{ $linkPresentasi->link }}" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay; fullscreen" height="315" width="560" style="margin-top:10px;"></iframe><br>
+                        {!! $linkPresentasi->link !!}
+                        {{-- <iframe src="{{ $linkPresentasi->link }}" id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay; fullscreen" height="315" width="560" style="margin-top:10px;"></iframe><br> --}}
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                             <a href="{{route("linkPresentasi.destroy", $linkPresentasi->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Presentasi</a>
                         @endif
