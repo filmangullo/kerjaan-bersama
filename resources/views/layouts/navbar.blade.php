@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <h1><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Web <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Belajar</label></h1>
                 </a>
             </div>

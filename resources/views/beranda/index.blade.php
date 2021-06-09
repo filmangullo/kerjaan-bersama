@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="container">
 					<div class="carousel-caption">
 
-						<h4>Jangan biarkan opini orang lain menenggelamkan suara dari dalam diri Anda.></h4>
+						<h4>Jangan biarkan opini orang lain menenggelamkan suara dari dalam diri Anda.</h4>
 						<p>Steve Jobs</p>
 
 					</div>

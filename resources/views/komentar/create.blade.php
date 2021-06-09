@@ -6,11 +6,11 @@
         </button>
     </div>
     <form action="{{route('komentar.store',$pertemuan->id)}}" method="post" enctype="multipart/form-data">
-    @csrf   
+    @csrf
     <div class="modal-body">
-        <div class="input-group mb-3">
+        <div class="mb-3 input-group">
             <div class="custom-file" style="border-style: solid; border-width: 1px; border-color:#ccc; padding:10px;">
-                <input type="file" class="custom-file-input" id="fileX" name="file" onchange="myFile()" required>
+                <input type="file" class="custom-file-input" id="fileX" name="file" onchange="myFile()">
                 <label class="custom-file-label" for="file"><span id="nameFileX">pilih file berupa gambar....</span></label>
             </div>
         </div>
