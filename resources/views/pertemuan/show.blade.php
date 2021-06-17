@@ -61,23 +61,23 @@
 
                     {{-- Dokumen --}}
                     @foreach ($pertemuan->dokumens as $dokumen)
-                    <h3>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></h3>
+                    <h3>Dokumen : <a class="float-left btn btn-success btn-block" href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></h3>
 
                     @endforeach
 
                     {{-- Kuis --}}
                     @foreach ($pertemuan->linkKuis as $linkKuis)
-                        <h3 style="margin-bottom:-4px;">{{$linkKuis->nama}} <a href="{{$linkKuis->link}}" target="blank"> : Mulai Kuis..</a></h3>
+                        <h3 style="margin-bottom:-4px;">{{$linkKuis->nama}} : <a class="float-left btn btn-success btn-block" href="{{$linkKuis->link}}" target="blank"> Mulai Kuis..</a></h3>
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
                             <a href="{{route("linkKuis.destroy", $linkKuis->id)}}" class="label label-danger "><i class="fa fa-trash-o" aria-hidden="true"> </i> Hapus Link Kuis</a>
                         @endif
                     @endforeach
                     @foreach ($pertemuan->tugas as $tugas)
-                    <div style="margin-top:10px; display:block;">
-                        <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="float-left btn btn-success" style="width:80%;">Tugas</a>
+                    <div style="margin-top:55px; display:block;">
+                        <a href="{{route('tugasKumpul.create', $tugas->id) }}" class="float-left btn btn-success btn-block">Tugas</a>
 
                         @if ((Auth::user()->id == $pertemuan->user_id && Auth::user()->role == 'pengajar') || Auth::user()->role == 'admin')
-                            <a href="{{ route('tugas.destroy', $tugas->id) }}" class="float-right btn btn-danger">Hapus</a>
+                            <a href="{{ route('tugas.destroy', $tugas->id) }}" class="float-right label label-danger ">Hapus</a>
                         @endif
                     </div>
                     @endforeach
