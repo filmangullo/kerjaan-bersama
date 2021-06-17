@@ -61,7 +61,7 @@
 
                     {{-- Dokumen --}}
                     @foreach ($pertemuan->dokumens as $dokumen)
-                        <p>Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></p>
+                    <h3 style="margin-bottom:-4px;">Dokumen : <a href="{{asset('storage/'.$dokumen->file)}}">{{ $dokumen->nama }}</a></h3>
 
                     @endforeach
 
