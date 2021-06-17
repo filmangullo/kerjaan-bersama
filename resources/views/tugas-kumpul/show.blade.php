@@ -23,6 +23,8 @@
         <div class="inner_sec_grids_info_w3ls" >
         <div class="col-md-12" style="margin-bottom:40px;">
             <p>{!! $tugasKumpul->keterangan !!}</p> <br>
+
+            <img src="{{ asset($tugasKumpul->file) }}">
             <p>
                 @if ($tugasKumpul->file != null)
                     <a href="{{ asset($tugasKumpul->file) }}">Download File</a>
