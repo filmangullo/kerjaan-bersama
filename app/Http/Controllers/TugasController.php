@@ -79,7 +79,7 @@ class TugasController extends Controller
         $tugasKumpul->user_id         = Auth::user()->id;
         $tugasKumpul->tugas_id        = $tugas->id;
         $tugasKumpul->keterangan      = $request->keterangan;
-        $tugasKumpul->file            = substr($path,7);
+        $tugasKumpul->file            = 'storage/'.substr($path,7);
         if ($request->hasFile('file')) {
             $tugasKumpul->nama = $request->file('file')->getClientOriginalName();
         }
