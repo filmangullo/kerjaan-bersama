@@ -38,7 +38,7 @@ class TugasController extends Controller
         $tugas->deadline        = $request->deadline;
         $tugas->pertemuan_id    = $pertemuan->id;
         $tugas->keterangan      = $request->keterangan;
-        $tugas->file            = substr($path,7);
+        $tugas->file            = 'storage/'.substr($path,7);
         if ($request->hasFile('file')) {
             $tugas->nama = $request->file('file')->getClientOriginalName();
         }
