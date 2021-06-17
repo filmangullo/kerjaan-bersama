@@ -25,7 +25,7 @@
             <p>{!! $tugasKumpul->keterangan !!}</p> <br>
             <p>
                 @if ($tugasKumpul->file != null)
-                <a href="{{ $tugasKumpul->file }}" download>Download File</a>
+                    <a href="{{ $tugasKumpul->file }}">Download File</a>
                 @endif
 
             </p>
