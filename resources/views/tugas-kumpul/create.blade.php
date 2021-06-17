@@ -29,7 +29,7 @@
         <div class="inner_sec_grids_info_w3ls" >
         <div class="col-md-12" style="margin-bottom:40px;">
             <p>{!! $tugas->keterangan !!}</p> <br>
-
+            <img src="{!! asset($tugas->file)!!}" >
             <p>
                 <a href="{!! asset($tugas->file)!!}" download>{!! $tugas->nama !!}</a>
             </p>
