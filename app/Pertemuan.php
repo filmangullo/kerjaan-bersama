@@ -18,6 +18,11 @@ class Pertemuan extends Model
         return $this->hasMany('App\DaftarHadir', 'pertemuan_id', 'id');
     }
 
+    public function daftarHadirWaktuTutup()
+    {
+        return $this->hasOne('App\DaftarHadirWaktuTutup', 'pertemuan_id', 'id');
+    }
+
     public function mataPelajarans()
     {
         return $this->belongsTo('App\MataPelajaran', 'mata_pelajarans_id', 'id');

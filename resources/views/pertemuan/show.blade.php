@@ -151,8 +151,9 @@
                         <a href="{{route("tugas.create", $pertemuan->id) }}" class="btn btn-block btn-info">Tambah Tugas</a>
                     </div>
                 @endif
+                @if(strtotime($pertemuan->daftarHadirWaktuTutup->tanggal_dan_jam) > strtotime(date('Y-m-d H:i:s')) )
                 <div class="widget_search">
-                    <h5 class="widget-title">Absensi</h5>
+                    <h5 class="widget-title">Absensi Tutup : <br>{{ date('d-m-Y H:i:s', strtotime($pertemuan->daftarHadirWaktuTutup->tanggal_dan_jam)) }}</h5>
                     <div class="widget-content">
                         <span>I'm looking for a ...</span>
                         <form action="{{ route("pertemuan.daftarHadir", $pertemuan->id) }}" method="POST">
@@ -167,6 +168,8 @@
                         </form>
                     </div>
                 </div>
+                @endif
+
                 <div class="col_3 permit">
                     <h3>Daftar Hadir</h3>
                     <ul class="list_2">

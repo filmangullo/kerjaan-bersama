@@ -16,7 +16,16 @@
 
 @section('content')
 <div class="inner_content_info_agileits">
+
     <div class="container">
+        <div>
+            <form action="{{ route('pertemuan.updateWaktuTutupDaftarHadir', $pertemuan->id) }}" method="POST">
+                @csrf
+                <label>Waktu Tutup : @if(isset($pertemuan->daftarHadirWaktuTutup->tanggal_dan_jam)){{ date('d-M-Y, h:i', strtotime($pertemuan->daftarHadirWaktuTutup->tanggal_dan_jam)) }} @endif</label> <br>
+                <input type="datetime-local" name="tanggal_dan_jam" value="" required>
+                <button type="submit" class="btn btn-info btn-outline btn-md">Simpan</button>
+            </form>
+        </div>
         <div style="margin-top:30px;">
             <table id="myTable" class="table">
                 <thead class="thead-dark">

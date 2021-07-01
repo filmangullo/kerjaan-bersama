@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\DaftarHadirWaktuTutup;
 use App\MataPelajaran;
 use App\DaftarHadir;
 use App\Pertemuan;
@@ -95,6 +96,28 @@ class PertemuanController extends Controller
             'pertemuan'     => $pertemuan,
             'daftarHadir'   => $daftarHadir
         ]);
+    }
+
+    public function updateWaktuTutupDaftarHadir(Request $request,$id)
+    {
+        if($query = DaftarHadirWaktuTutup::where('pertemuan_id', $id)->exists())
+        {
+            $queryy = DaftarHadirWaktuTutup::where('pertemuan_id', $id)->firstOrfail();
+
+            $queryy->tanggal_dan_jam   = $request->tanggal_dan_jam;
+
+            $queryy->save();
+
+        } else
+        {
+            $querys = DaftarHadirWaktuTutup::create([
+                'pertemuan_id'      => $id,
+                'tanggal_dan_jam'   => $request->tanggal_dan_jam
+            ]);
+        }
+
+
+        return redirect()->back();
     }
 
     public function dokumenCreate($id)

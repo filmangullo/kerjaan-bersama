@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\PertemuanController;
+
 Route::get('/', 'BerandaController@index')->name('beranda.index');
 Route::get('/mata-pelajaran/create', 'BerandaController@create')->name('mata-pelajaran.create');
 Route::post('/mata-pelajaran/store', 'BerandaController@store')->name('mata-pelajaran.store');
@@ -21,6 +23,7 @@ Route::group(['prefix' => 'pertemuan'], function () {
     Route::post('/{id}/store', 'PertemuanController@store')->name('pertemuan.store');
     Route::get('/{id}/show', 'PertemuanController@show')->name('pertemuan.show');
     Route::get('/{id}/export-daftar-hadir', 'PertemuanController@exportDaftarHadir')->name('pertemuan.exportDaftarHadir');
+    Route::post('{id}/update-new-tutup-d-h', 'PertemuanController@updateWaktuTutupDaftarHadir')->name('pertemuan.updateWaktuTutupDaftarHadir');
 
     Route::post('/{id}/daftar-hadir', 'PertemuanController@daftarHadir')->name('pertemuan.daftarHadir');
 

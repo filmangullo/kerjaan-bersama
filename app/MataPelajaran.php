@@ -12,4 +12,5 @@ class MataPelajaran extends Model
     {
         return $this->hasMany('App\Pertemuan', 'mata_pelajarans_id', 'id');
     }
+
 }
