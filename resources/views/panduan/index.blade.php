@@ -30,6 +30,14 @@
             </div>
         </div>
 
+        @auth
+        @if (Auth::user()->role != 'pelajar' && Auth::user()->role_approve == true)
+            <h4>Dokumen : <a href="{{ asset('Pedoman Guru.docx') }}">Pedoman Lengkap Guru</a></h4>
+        @endif
+        <h4>Dokumen : <a href="{{ asset('Pedoman Siswa.docx') }}">Pedoman Lengkap Siswa</a></h4>
+
+        @endauth
+
     </div>
 </div>
 @endsection
