@@ -45,6 +45,25 @@ class PertemuanController extends Controller
         ])->render();
     }
 
+    public function edit($id)
+    {
+        $pertemuan  = Pertemuan::where('id', $id)->firstOrFail();
+        return view('pertemuan.update',[
+            'pertemuan'     => $pertemuan
+        ])->render();
+    }
+
+    public function update(Request $request,$id)
+    {
+        $pertemuan  = Pertemuan::where('id', $id)->firstOrFail();
+
+        $pertemuan->nama    = $request->nama;
+
+        $pertemuan->save();
+
+        return redirect()->route('pertemuan.show', ['id'    => $id]);
+    }
+
     public function store(Request $request, $id)
     {
         $mataPelajaran  = MataPelajaran::where('id', $id)->firstOrFail();

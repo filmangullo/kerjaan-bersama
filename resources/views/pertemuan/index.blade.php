@@ -37,7 +37,7 @@
 
                 <ul class="some_agile_facts">
                     @foreach ($pertemuan as $item)
-                    <li><a href="{{route("pertemuan.show", $item->id)}}" class="show-pertemuan"><span class="fa fa-briefcase" aria-hidden="true"></span> {{$item->nama}}</a></li>
+                    <li><a href="{{route("pertemuan.show", $item->id)}}" class="show-pertemuan"><span class="fa fa-briefcase" aria-hidden="true"></span> {{$item->nama}}</a> @if (Auth::user()->role != 'pelajar')<a href="{{route("pertemuan.edit", $item->id)}}">Edit</a> @endif</li>
                     @endforeach
                 </ul>
                 <div class="clearfix"> </div>

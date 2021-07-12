@@ -20,6 +20,8 @@ Route::post('/mata-pelajaran/store', 'BerandaController@store')->name('mata-pela
 Route::group(['prefix' => 'pertemuan'], function () {
     Route::get('/{id}', 'PertemuanController@index')->name('pertemuan.index');
     Route::get('/{id}/create', 'PertemuanController@create')->name('pertemuan.create');
+    Route::get('/{id}/edit', 'PertemuanController@edit')->name('pertemuan.edit');
+    Route::post('/{id}/update', 'PertemuanController@update')->name('pertemuan.update');
     Route::post('/{id}/store', 'PertemuanController@store')->name('pertemuan.store');
     Route::get('/{id}/show', 'PertemuanController@show')->name('pertemuan.show');
     Route::get('/{id}/export-daftar-hadir', 'PertemuanController@exportDaftarHadir')->name('pertemuan.exportDaftarHadir');
